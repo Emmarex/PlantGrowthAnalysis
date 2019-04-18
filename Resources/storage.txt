@@ -1,0 +1,59 @@
+﻿Timestamp = 16-01-2019 08:40 :Light = 65.00 :Temp_Soil = 20.5625 :Temp_Air = 23.1875 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 780 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 08:42 :Light = 65.00 :Temp_Soil = 20.5625 :Temp_Air = 23.125 :Soil_Moisture_1 = 755 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 08:44 :Light = 66.00 :Temp_Soil = 20.5625 :Temp_Air = 23 :Soil_Moisture_1 = 758 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1001
+
+Timestamp = 16-01-2019 08:46 :Light = 71.00 :Temp_Soil = 20.5625 :Temp_Air = 22.9375 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 08:48 :Light = 71.00 :Temp_Soil = 20.5625 :Temp_Air = 22.875 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 783 :Soil_Moisture_3 = 1003
+
+Timestamp = 16-01-2019 08:50 :Light = 71.00 :Temp_Soil = 20.5625 :Temp_Air = 22.8125 :Soil_Moisture_1 = 757 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1000
+
+Timestamp = 16-01-2019 08:52 :Light = 73.00 :Temp_Soil = 20.5625 :Temp_Air = 22.75 :Soil_Moisture_1 = 760 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 08:54 :Light = 69.00 :Temp_Soil = 20.625 :Temp_Air = 22.75 :Soil_Moisture_1 = 757 :Soil_Moisture_2 = 784 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 08:56 :Light = 68.00 :Temp_Soil = 20.5625 :Temp_Air = 22.6875 :Soil_Moisture_1 = 755 :Soil_Moisture_2 = 783 :Soil_Moisture_3 = 1003
+
+Timestamp = 16-01-2019 08:58 :Light = 69.00 :Temp_Soil = 20.5625 :Temp_Air = 22.625 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:00 :Light = 67.00 :Temp_Soil = 20.625 :Temp_Air = 22.625 :Soil_Moisture_1 = 759 :Soil_Moisture_2 = 783 :Soil_Moisture_3 = 1003
+
+Timestamp = 16-01-2019 09:02 :Light = 67.00 :Temp_Soil = 20.625 :Temp_Air = 22.5625 :Soil_Moisture_1 = 757 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1004
+
+Timestamp = 16-01-2019 09:04 :Light = 67.00 :Temp_Soil = 20.625 :Temp_Air = 22.5625 :Soil_Moisture_1 = 758 :Soil_Moisture_2 = 785 :Soil_Moisture_3 = 1007
+
+Timestamp = 16-01-2019 09:06 :Light = 61.00 :Temp_Soil = 20.5625 :Temp_Air = 22.5 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 787 :Soil_Moisture_3 = 1003
+
+Timestamp = 16-01-2019 09:08 :Light = 55.00 :Temp_Soil = 20.625 :Temp_Air = 22.4375 :Soil_Moisture_1 = 759 :Soil_Moisture_2 = 785 :Soil_Moisture_3 = 1005
+
+Timestamp = 16-01-2019 09:10 :Light = 53.00 :Temp_Soil = 20.5625 :Temp_Air = 22.4375 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 784 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:12 :Light = 54.00 :Temp_Soil = 20.5625 :Temp_Air = 22.375 :Soil_Moisture_1 = 757 :Soil_Moisture_2 = 783 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:14 :Light = 53.00 :Temp_Soil = 20.625 :Temp_Air = 22.375 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1001
+
+Timestamp = 16-01-2019 09:16 :Light = 53.00 :Temp_Soil = 20.5625 :Temp_Air = 22.375 :Soil_Moisture_1 = 758 :Soil_Moisture_2 = 784 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:18 :Light = 47.00 :Temp_Soil = 20.625 :Temp_Air = 22.3125 :Soil_Moisture_1 = 758 :Soil_Moisture_2 = 785 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:20 :Light = 48.00 :Temp_Soil = 20.625 :Temp_Air = 22.3125 :Soil_Moisture_1 = 758 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:22 :Light = 67.00 :Temp_Soil = 20.625 :Temp_Air = 22.25 :Soil_Moisture_1 = 759 :Soil_Moisture_2 = 786 :Soil_Moisture_3 = 1001
+
+Timestamp = 16-01-2019 09:24 :Light = 69.00 :Temp_Soil = 20.5625 :Temp_Air = 22.25 :Soil_Moisture_1 = 757 :Soil_Moisture_2 = 784 :Soil_Moisture_3 = 1001
+
+Timestamp = 16-01-2019 09:26 :Light = 64.00 :Temp_Soil = 20.625 :Temp_Air = 22.25 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 783 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:28 :Light = 65.00 :Temp_Soil = 20.625 :Temp_Air = 22.1875 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 784 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:30 :Light = 65.00 :Temp_Soil = 20.5625 :Temp_Air = 22.1875 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 782 :Soil_Moisture_3 = 998
+
+Timestamp = 16-01-2019 09:32 :Light = 66.00 :Temp_Soil = 20.625 :Temp_Air = 22.1875 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 781 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:34 :Light = 66.00 :Temp_Soil = 20.625 :Temp_Air = 22.125 :Soil_Moisture_1 = 756 :Soil_Moisture_2 = 784 :Soil_Moisture_3 = 1002
+
+Timestamp = 16-01-2019 09:36 :Light = 66.00 :Temp_Soil = 20.625 :Temp_Air = 22.125 :Soil_Moisture_1 = 758 :Soil_Moisture_2 = 783 :Soil_Moisture_3 = 1000
+
+
