@@ -13,11 +13,14 @@ def index_page():
 @app.route("/fetch_data",methods=['GET'])
 def update_graph_data():
     try:
-        query_record = SensorData.query.order_by(SensorData.time_stamp).all()
+        start = int(request.args.get('start'))
+        stop = int(request.args.get('stop'))
+        query_record = SensorData.query.order_by(SensorData.time_stamp).offset(start).limit(stop).all()
         return_data = {
+            'data' : [single_record.serialize for single_record in query_record],
             'error' : '0',
             'message' : '',
-            'data' : [single_record.serialize for single_record in query_record]
+            'count' : len(query_record)
         }
     except Exception as e:
         return_data = {

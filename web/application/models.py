@@ -22,7 +22,7 @@ class SensorData(data_base.Model):
         return {
            'time_stamp': dump_datetime(self.time_stamp),
            'soil_temp': self.soil_temperature,
-           'air_temperature': self.air_temperature,
+           'air_temp': self.air_temperature,
            'light_intensity': self.light_intensity,
            'soil_moisture_1': self.soil_moisture_01,
            'soil_moisture_2': self.soil_moisture_02,
