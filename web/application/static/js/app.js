@@ -1,5 +1,43 @@
 $(function () {
 
+    var graph_series = []
+
+    function fetch_light_intensity_data(callback){
+        $.ajax({
+            url: "http://127.0.0.1:5000/fetch_data",
+            type: "GET",
+            processData: false,
+            contentType: false,
+            success: function (result, event) {
+                if (result["error"] == "0") {
+                    callback(result['data'])
+                } else {
+                    callback([])
+                }
+            },
+            error: function (result, event) {
+                callback([])
+            },
+        });
+    }
+
+    function set_data_refresh(){
+        setInterval(function () {
+            fetch_light_intensity_data(function(data){
+                if(data.length > 0){
+                    data.forEach(element => {
+                        graph_series[0].addPoint(new Date(element['time_stamp']).getTime(), element['soil_temp'])
+                        graph_series[1].addPoint(new Date(element['time_stamp']).getTime(), element['light_intensity'])
+                        graph_series[2].addPoint(new Date(element['time_stamp']).getTime(), element['air_temperature'])
+                        graph_series[3].addPoint(new Date(element['time_stamp']).getTime(), element['soil_moisture_1'])
+                        graph_series[4].addPoint(new Date(element['time_stamp']).getTime(), element['soil_moisture_2'])
+                        graph_series[5].addPoint(new Date(element['time_stamp']).getTime(), element['soil_moisture_3'])
+                    });
+                }
+            })
+        }, 10000);
+    }
+
     Highcharts.chart('soilTempGraph', {
         chart: {
             type: 'spline',
@@ -7,13 +45,7 @@ $(function () {
             marginRight: 10,
             events: {
                 load: function () {
-                    // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function () {
-                        var x = (new Date()).getTime(), // current time
-                            y = Math.random();
-                        series.addPoint([x, y], true, true);
-                    }, 1000);
+                    graph_series.push(this.series[0])
                 }
             }
         },
@@ -47,16 +79,14 @@ $(function () {
             name: 'Random data',
             data: (function () {
                 // generate an array of random data
-                var data = [],
-                    time = (new Date()).getTime(),
-                    i;
-
+                var data = [],time = (new Date()).getTime(),i;
                 for (i = -19; i <= 0; i += 1) {
                     data.push({
                         x: time + i * 1000,
                         y: Math.random()
                     });
                 }
+                // console.log(data)
                 return data;
             }())
         }]
@@ -66,100 +96,272 @@ $(function () {
         chart: {
             type: 'spline',
             animation: Highcharts.svg,
+            marginRight: 10,
+            events: {
+                load: function () {
+                    graph_series.push(this.series[0])
+                }
+            }
+        },
+        time: {
+            useUTC: false
         },
         title: {
             text: 'Air Temperature'
         },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
         yAxis: {
             title: {
-                text: 'Temperature (°F)'
-            }
+                text: 'Temperature ( ˚C )'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: true
         },
         series: [{
-            data: [
-                3.7, 3.3, 3.9, 5.1, 3.5, 3.8, 4.0, 5.0, 6.1, 3.7, 3.3, 6.4,
-                6.9, 6.0, 6.8, 4.4, 4.0, 3.8, 5.0, 4.9, 9.2, 9.6, 9.5, 6.3,
-                9.5, 10.8, 14.0, 11.5, 10.0, 10.2, 10.3, 9.4, 8.9, 10.6, 10.5, 11.1,
-                10.4, 10.7, 11.3, 10.2, 9.6, 10.2, 11.1, 10.8, 13.0, 12.5, 12.5, 11.3,
-                10.1
-            ]
-
-        }],
+            name: 'Random data',
+            data: (function () {
+                // generate an array of random data
+                var data = [],time = (new Date()).getTime(),i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                // console.log(data)
+                return data;
+            }())
+        }]
     });
 
     Highcharts.chart('lightGraph', {
         chart: {
             type: 'spline',
             animation: Highcharts.svg,
+            marginRight: 10,
+            events: {
+                load: function () {
+                    graph_series.push(this.series[0])
+                }
+            }
+        },
+        time: {
+            useUTC: false
         },
         title: {
             text: 'Light'
         },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
         yAxis: {
             title: {
-                text: 'Luminous (lm)'
-            }
+                text: 'Lumen ( lm )'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: true
         },
         series: [{
-            data: [
-                3.7, 3.3, 3.9, 5.1, 3.5, 3.8, 4.0, 5.0, 6.1, 3.7, 3.3, 6.4,
-                6.9, 6.0, 6.8, 4.4, 4.0, 3.8, 5.0, 4.9, 9.2, 9.6, 9.5, 6.3,
-                9.5, 10.8, 14.0, 11.5, 10.0, 10.2, 10.3, 9.4, 8.9, 10.6, 10.5, 11.1,
-                10.4, 10.7, 11.3, 10.2, 9.6, 10.2, 11.1, 10.8, 13.0, 12.5, 12.5, 11.3,
-                10.1
-            ]
-
-        }],
+            name: 'Random data',
+            data: (function () {
+                // generate an array of random data
+                var data = [],time = (new Date()).getTime(),i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                // console.log(data)
+                return data;
+            }())
+        }]
     });
 
     Highcharts.chart('soilMoistureGraph', {
         chart: {
             type: 'spline',
             animation: Highcharts.svg,
+            marginRight: 10,
+            events: {
+                load: function () {
+                    graph_series.push(this.series[0])
+                }
+            }
+        },
+        time: {
+            useUTC: false
         },
         title: {
             text: 'Soil Moisture 1'
         },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
         yAxis: {
             title: {
-                text: ''
-            }
+                text: 'meter cube'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: true
         },
         series: [{
-            data: [
-                3.7, 3.3, 3.9, 5.1, 3.5, 3.8, 4.0, 5.0, 6.1, 3.7, 3.3, 6.4,
-                6.9, 6.0, 6.8, 4.4, 4.0, 3.8, 5.0, 4.9, 9.2, 9.6, 9.5, 6.3,
-                9.5, 10.8, 14.0, 11.5, 10.0, 10.2, 10.3, 9.4, 8.9, 10.6, 10.5, 11.1,
-                10.4, 10.7, 11.3, 10.2, 9.6, 10.2, 11.1, 10.8, 13.0, 12.5, 12.5, 11.3,
-                10.1
-            ]
-
-        }],
+            name: 'Random data',
+            data: (function () {
+                // generate an array of random data
+                var data = [],time = (new Date()).getTime(),i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                // console.log(data)
+                return data;
+            }())
+        }]
     });
 
     Highcharts.chart('soilMoisture2Graph', {
         chart: {
             type: 'spline',
             animation: Highcharts.svg,
+            marginRight: 10,
+            events: {
+                load: function () {
+                    graph_series.push(this.series[0])
+                }
+            }
+        },
+        time: {
+            useUTC: false
         },
         title: {
             text: 'Soil Moisture 2'
         },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
         yAxis: {
             title: {
-                text: ''
-            }
+                text: 'meter cube'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: true
         },
         series: [{
-            data: [
-                3.7, 3.3, 3.9, 5.1, 3.5, 3.8, 4.0, 5.0, 6.1, 3.7, 3.3, 6.4,
-                6.9, 6.0, 6.8, 4.4, 4.0, 3.8, 5.0, 4.9, 9.2, 9.6, 9.5, 6.3,
-                9.5, 10.8, 14.0, 11.5, 10.0, 10.2, 10.3, 9.4, 8.9, 10.6, 10.5, 11.1,
-                10.4, 10.7, 11.3, 10.2, 9.6, 10.2, 11.1, 10.8, 13.0, 12.5, 12.5, 11.3,
-                10.1
-            ]
-
-        }],
+            name: 'Random data',
+            data: (function () {
+                // generate an array of random data
+                var data = [],time = (new Date()).getTime(),i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                // console.log(data)
+                return data;
+            }())
+        }]
     });
+
+    Highcharts.chart('soilMoisture3Graph', {
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg,
+            marginRight: 10,
+            events: {
+                load: function () {
+                    graph_series.push(this.series[0])
+                }
+            }
+        },
+        time: {
+            useUTC: false
+        },
+        title: {
+            text: 'Soil Moisture 3'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'meter cube'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: true
+        },
+        series: [{
+            name: 'Random data',
+            data: (function () {
+                // generate an array of random data
+                var data = [],time = (new Date()).getTime(),i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                // console.log(data)
+                return data;
+            }())
+        }]
+    });
+
+    set_data_refresh()
 
 });

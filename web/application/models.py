@@ -1,5 +1,10 @@
 from .app import data_base
 
+def dump_datetime(value):
+    if value is None:
+        return None
+    return f'{value.strftime("%Y-%m-%d %H:%M:%S")}'
+
 class SensorData(data_base.Model):
     __tablename__ = "sensor_data_db"
 
@@ -9,8 +14,17 @@ class SensorData(data_base.Model):
     soil_temperature = data_base.Column(data_base.Float)
     air_temperature = data_base.Column(data_base.Float)
     soil_moisture_01 = data_base.Column(data_base.Float)
-    soil_moisture_02 = data_base.Column(data_base.Float)
-    soil_moisture_02 = data_base.Column(data_base.Float)
+    soil_moisture_02 = data_base.Column(data_base.Float, nullable=True)
+    soil_moisture_03 = data_base.Column(data_base.Float, nullable=True)
 
-    def __repr__(self):
-        return '<SensorData {}>'.format(self.time_stamp)
+    @property
+    def serialize(self):
+        return {
+           'time_stamp': dump_datetime(self.time_stamp),
+           'soil_temp': self.soil_temperature,
+           'air_temperature': self.air_temperature,
+           'light_intensity': self.light_intensity,
+           'soil_moisture_1': self.soil_moisture_01,
+           'soil_moisture_2': self.soil_moisture_02,
+           'soil_moisture_3': self.soil_moisture_03
+        }

@@ -16,4 +16,5 @@ def create_app():
 
     with flask_app.app_context():
         from . import routes
+        data_base.create_all()
         return flask_app
