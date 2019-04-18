@@ -184,12 +184,25 @@ $(function () {
                         var data = result['data']
                         if (data.length > 0) {
                             data.forEach(element => {
-                                graph_series[0].addPoint(new Date(element['time_stamp']).getTime(), element['soil_temp'])
-                                graph_series[1].addPoint(new Date(element['time_stamp']).getTime(), element['light_intensity'])
-                                graph_series[2].addPoint(new Date(element['time_stamp']).getTime(), element['air_temperature'])
-                                graph_series[3].addPoint(new Date(element['time_stamp']).getTime(), element['soil_moisture_1'])
-                                graph_series[4].addPoint(new Date(element['time_stamp']).getTime(), element['soil_moisture_2'])
-                                graph_series[5].addPoint(new Date(element['time_stamp']).getTime(), element['soil_moisture_3'])
+                                shift = graph_series[1].data.length > 30;
+                                graph_series[0].addPoint([
+                                    new Date(element['time_stamp']).getTime(), element['soil_temp']
+                                ], true, shift)
+                                graph_series[1].addPoint([
+                                    new Date(element['time_stamp']).getTime(), element['light_intensity']
+                                ], true, shift)
+                                graph_series[2].addPoint([
+                                    new Date(element['time_stamp']).getTime(), element['air_temperature']
+                                ], true, shift)
+                                graph_series[3].addPoint([
+                                    new Date(element['time_stamp']).getTime(), element['soil_moisture_1']
+                                ], true, shift)
+                                graph_series[4].addPoint([
+                                    new Date(element['time_stamp']).getTime(), element['soil_moisture_2']
+                                ], true, shift)
+                                graph_series[5].addPoint([
+                                    new Date(element['time_stamp']).getTime(), element['soil_moisture_3']
+                                ], true, shift)
                             });
                         }
                         window.localStorage.setItem('limit',limit)
@@ -197,7 +210,7 @@ $(function () {
                 },
                 error: function (result, event) {},
             });
-        }, 300000);
+        }, 30000);
     }
 
     $(document).ready(function () {
