@@ -184,25 +184,24 @@ $(function () {
                         var data = result['data']
                         if (data.length > 0) {
                             data.forEach(element => {
-                                shift = graph_series[1].data.length > 30;
                                 graph_series[0].addPoint([
                                     new Date(element['time_stamp']).getTime(), element['soil_temp']
-                                ], true, shift)
+                                ], true, graph_series[0].data.length > 30)
                                 graph_series[1].addPoint([
                                     new Date(element['time_stamp']).getTime(), element['light_intensity']
-                                ], true, shift)
+                                ], true, graph_series[1].data.length > 30)
                                 graph_series[2].addPoint([
                                     new Date(element['time_stamp']).getTime(), element['air_temperature']
-                                ], true, shift)
+                                ], true, graph_series[2].data.length > 30)
                                 graph_series[3].addPoint([
                                     new Date(element['time_stamp']).getTime(), element['soil_moisture_1']
-                                ], true, shift)
+                                ], true, graph_series[3].data.length > 30)
                                 graph_series[4].addPoint([
                                     new Date(element['time_stamp']).getTime(), element['soil_moisture_2']
-                                ], true, shift)
+                                ], true, graph_series[4].data.length > 30)
                                 graph_series[5].addPoint([
                                     new Date(element['time_stamp']).getTime(), element['soil_moisture_3']
-                                ], true, shift)
+                                ], true, graph_series[5].data.length > 30)
                             });
                         }
                         window.localStorage.setItem('limit',limit)
