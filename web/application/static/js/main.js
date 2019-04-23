@@ -184,24 +184,36 @@ $(function () {
                         var data = result['data']
                         if (data.length > 0) {
                             data.forEach(element => {
-                                graph_series[0].addPoint([
-                                    new Date(element['time_stamp']).getTime(), element['soil_temp']
-                                ], true, graph_series[0].data.length > 30)
-                                graph_series[1].addPoint([
-                                    new Date(element['time_stamp']).getTime(), element['light_intensity']
-                                ], true, graph_series[1].data.length > 30)
-                                graph_series[2].addPoint([
-                                    new Date(element['time_stamp']).getTime(), element['air_temperature']
-                                ], true, graph_series[2].data.length > 30)
-                                graph_series[3].addPoint([
-                                    new Date(element['time_stamp']).getTime(), element['soil_moisture_1']
-                                ], true, graph_series[3].data.length > 30)
-                                graph_series[4].addPoint([
-                                    new Date(element['time_stamp']).getTime(), element['soil_moisture_2']
-                                ], true, graph_series[4].data.length > 30)
-                                graph_series[5].addPoint([
-                                    new Date(element['time_stamp']).getTime(), element['soil_moisture_3']
-                                ], true, graph_series[5].data.length > 30)
+                                if(element['soil_temp'] != "" && element['soil_temp'] != null){
+                                    graph_series[0].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['soil_temp']
+                                    ], true, graph_series[0].data.length > 30)
+                                }
+                                if(element['light_intensity'] != "" && element['light_intensity'] != null){
+                                    graph_series[1].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['light_intensity']
+                                    ], true, graph_series[1].data.length > 30)
+                                }
+                                if(element['air_temperature'] != "" && element['air_temperature'] != null){
+                                    graph_series[2].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['air_temperature']
+                                    ], true, graph_series[2].data.length > 30)
+                                }
+                                if(element['soil_moisture_1'] != "" && element['soil_moisture_1'] != null){
+                                    graph_series[3].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['soil_moisture_1']
+                                    ], true, graph_series[3].data.length > 30)
+                                }
+                                if(element['soil_moisture_2'] != "" && element['soil_moisture_2'] != null){
+                                    graph_series[4].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['soil_moisture_2']
+                                    ], true, graph_series[4].data.length > 30)
+                                }
+                                if(element['soil_moisture_3'] != "" && element['soil_moisture_3'] != null){
+                                    graph_series[5].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['soil_moisture_3']
+                                    ], true, graph_series[5].data.length > 30)
+                                }
                             });
                         }
                         window.localStorage.setItem('limit',limit)
