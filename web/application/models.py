@@ -13,7 +13,7 @@ class SensorData(data_base.Model):
     light_intensity = data_base.Column(data_base.Float)
     soil_temperature = data_base.Column(data_base.Float)
     air_temperature = data_base.Column(data_base.Float)
-    soil_moisture_01 = data_base.Column(data_base.Float)
+    soil_moisture_01 = data_base.Column(data_base.Float, nullable=True)
     soil_moisture_02 = data_base.Column(data_base.Float, nullable=True)
     soil_moisture_03 = data_base.Column(data_base.Float, nullable=True)
 
