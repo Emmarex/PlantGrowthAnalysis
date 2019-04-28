@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-db_path = os.path.join(os.path.dirname(__file__), 'database/sensor_data.db')
+db_path = os.path.join(os.path.dirname(__file__), 'database/SensorDataDB.db')
 data_base = SQLAlchemy()
 
 def create_app():

@@ -175,7 +175,7 @@ $(function () {
             start_location = window.localStorage.getItem('limit')
             limit = parseInt(start_location) + 10
             $.ajax({
-                url: "http://127.0.0.1:5000/fetch_data?start="+start_location+"&stop="+limit,
+                url: "http://127.0.0.1:5000/fetch_pi_data?start="+start_location+"&stop="+limit,
                 type: "GET",
                 processData: false,
                 contentType: false,
@@ -189,15 +189,31 @@ $(function () {
                                         new Date(element['time_stamp']).getTime(), element['soil_temp']
                                     ], true, graph_series[0].data.length > 30)
                                 }
-                                if(element['light_intensity'] != "" && element['light_intensity'] != null){
-                                    graph_series[1].addPoint([
-                                        new Date(element['time_stamp']).getTime(), element['light_intensity']
-                                    ], true, graph_series[1].data.length > 30)
-                                }
                                 if(element['air_temperature'] != "" && element['air_temperature'] != null){
                                     graph_series[2].addPoint([
                                         new Date(element['time_stamp']).getTime(), element['air_temperature']
                                     ], true, graph_series[2].data.length > 30)
+                                }
+                            });
+                        }
+                    }
+                },
+                error: function (result, event) {},
+            });
+            $.ajax({
+                url: "http://127.0.0.1:5000/fetch_arduino_data?start="+start_location+"&stop="+limit,
+                type: "GET",
+                processData: false,
+                contentType: false,
+                success: function (result, event) {
+                    if (result["error"] == "0") {
+                        var data = result['data']
+                        if (data.length > 0) {
+                            data.forEach(element => {
+                                if(element['light_intensity'] != "" && element['light_intensity'] != null){
+                                    graph_series[1].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['light_intensity']
+                                    ], true, graph_series[1].data.length > 30)
                                 }
                                 if(element['soil_moisture_1'] != "" && element['soil_moisture_1'] != null){
                                     graph_series[3].addPoint([
@@ -227,20 +243,32 @@ $(function () {
     $(document).ready(function () {
 
         $.ajax({
-            url: "http://127.0.0.1:5000/fetch_data?start=0&stop=10",
+            url: "http://127.0.0.1:5000/fetch_pi_data?start=0&stop=10",
             type: "GET",
             processData: false,
             contentType: false,
             success: function (result, event) {
                 if (result["error"] == "0") {
-                    preprocess_data(result['data'])
+                    preprocess_pi_data(result['data'])
+                    $.ajax({
+                        url: "http://127.0.0.1:5000/fetch_arduino_data?start=0&stop=10",
+                        type: "GET",
+                        processData: false,
+                        contentType: false,
+                        success: function (result, event) {
+                            if (result["error"] == "0") {
+                                preprocess_arduino_data(result['data'])
+                            }
+                        },
+                        error: function (result, event) {},
+                    });
                 }
             },
             error: function (result, event) {},
         });
 
-        function preprocess_data(data) {
-            soil_temp_data = [], air_temp_data = [], light_data = [], soil_moisture = [], soil_moisture02 = [], soil_moisture03 = []
+        function preprocess_pi_data(data) {
+            soil_temp_data = [], air_temp_data = []
             data.forEach(element => {
                 soil_temp_data.push([
                     new Date(element['time_stamp']).getTime(), element['soil_temp']
@@ -248,6 +276,18 @@ $(function () {
                 air_temp_data.push([
                     new Date(element['time_stamp']).getTime(), element['air_temp']
                 ])
+            });
+            // soil temperature
+            soil_temp_graph_option.series[0].data = soil_temp_data
+            Highcharts.chart('soilTempGraph', soil_temp_graph_option)
+            // air temperature
+            air_temp_graph_option.series[0].data = air_temp_data
+            Highcharts.chart('airTempGraph', air_temp_graph_option)
+        }
+
+        function preprocess_arduino_data(data) {
+            light_data = [], soil_moisture = [], soil_moisture02 = [], soil_moisture03 = []
+            data.forEach(element => {
                 light_data.push([
                     new Date(element['time_stamp']).getTime(), element['light_intensity']
                 ])
@@ -261,12 +301,6 @@ $(function () {
                     new Date(element['time_stamp']).getTime(), element['soil_moisture_3']
                 ])
             });
-            // soil temperature
-            soil_temp_graph_option.series[0].data = soil_temp_data
-            Highcharts.chart('soilTempGraph', soil_temp_graph_option)
-            // air temperature
-            air_temp_graph_option.series[0].data = air_temp_data
-            Highcharts.chart('airTempGraph', air_temp_graph_option)
             // light intensity
             light_graph_option.series[0].data = light_data
             Highcharts.chart('lightGraph', light_graph_option)
