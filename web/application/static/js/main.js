@@ -242,6 +242,12 @@ $(function () {
 
     $(document).ready(function () {
 
+        Highcharts.setOptions({
+            global: {
+              useUTC: false
+            }
+        });
+
         $.ajax({
             url: "http://127.0.0.1:5000/fetch_pi_data?start=0&stop=10",
             type: "GET",
