@@ -22,7 +22,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Temperature ( ˚F )'
+                text: 'Temperature ( ˚C )'
             }
         },
         series: [{
@@ -50,7 +50,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Temperature ( ˚F )'
+                text: 'Temperature ( ˚C )'
             }
         },
         series: [{
@@ -182,6 +182,7 @@ $(function () {
                 success: function (result, event) {
                     if (result["error"] == "0") {
                         var data = result['data']
+                        console.log(data)
                         if (data.length > 0) {
                             data.forEach(element => {
                                 if(element['soil_temp'] != "" && element['soil_temp'] != null){
@@ -189,10 +190,10 @@ $(function () {
                                         new Date(element['time_stamp']).getTime(), element['soil_temp']
                                     ], true, graph_series[0].data.length > 30)
                                 }
-                                if(element['air_temperature'] != "" && element['air_temperature'] != null){
-                                    graph_series[2].addPoint([
-                                        new Date(element['time_stamp']).getTime(), element['air_temperature']
-                                    ], true, graph_series[2].data.length > 30)
+                                if(element['air_temp'] != "" && element['air_temp'] != null){
+                                    graph_series[1].addPoint([
+                                        new Date(element['time_stamp']).getTime(), element['air_temp']
+                                    ], true, graph_series[1].data.length > 30)
                                 }
                             });
                         }
@@ -211,7 +212,7 @@ $(function () {
                         if (data.length > 0) {
                             data.forEach(element => {
                                 if(element['light_intensity'] != "" && element['light_intensity'] != null){
-                                    graph_series[1].addPoint([
+                                    graph_series[2].addPoint([
                                         new Date(element['time_stamp']).getTime(), element['light_intensity']
                                     ], true, graph_series[1].data.length > 30)
                                 }
