@@ -1,4 +1,5 @@
 #
+from datetime import datetime
 import requests
 # Light sensor
 import board
@@ -8,7 +9,11 @@ import adafruit_tsl2561
 def log_arduino_data_to_server(sensor_data):
     log_data = requests.post('http://127.0.0.1:5000/dump_arduino_data',data=sensor_data)
     if log_data.status_code == 200:
-        print('Successful')
+        res = log_data.json()
+        if res['error'] == "0":
+            print('Data Logging Successful')
+        else:
+            print(f'ERROR: {res["message"]}')
     else:
         log_data_to_server(sensor_data)
     
@@ -20,6 +25,7 @@ while True:
         print(f'Luminousity: {light_sensor.lux}')
         # send to server
         sensor_data = {
+            "time_stamp": datetime.now(),
             "light_intensity":light_sensor.lux,
             "soil_mois_1" : "",
             "soil_mois_2" : "",

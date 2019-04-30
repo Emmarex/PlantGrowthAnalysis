@@ -51,11 +51,11 @@ def update_arudino_graph_data():
 @app.route("/dump_pi_data",methods=['POST'])
 def data_dump_process():
     try:
-        time_stamp_dt = datetime.strptime(request.form['time_stamp'],'%d-%m-%Y %H:%M')
+        time_stamp_dt = datetime.strptime(request.form['time_stamp'],'%Y-%m-%d %H:%M:%S.%f')
         single_sensor_data = RapsberrySensorData(time_stamp=time_stamp_dt,soil_temperature=request.form['soil_temp'],
                                                 air_temperature=request.form['air_temp'])
         data_base.session.add(single_sensor_data)
-        data_base.session.commit()
+        x = data_base.session.commit()
         return_data = {
             'error' : '0',
             'message' : 'Data logged'
@@ -70,7 +70,7 @@ def data_dump_process():
 @app.route("/dump_arduino_data",methods=['POST'])
 def arduino_data_dump_process():
     try:
-        time_stamp_dt = datetime.strptime(request.form['time_stamp'],'%d-%m-%Y %H:%M')
+        time_stamp_dt = datetime.strptime(request.form['time_stamp'],'%Y-%m-%d %H:%M:%S.%f')
         single_sensor_data = ArduinoSensorData(time_stamp=time_stamp_dt,light_intensity=request.form['light_intensity'],
                                         soil_moisture_01=request.form['soil_mois_1'],soil_moisture_02=request.form['soil_mois_2'],
                                         soil_moisture_03=request.form['soil_mois_3'])
