@@ -21,7 +21,7 @@ while True:
     try:
         # Light Intensity
         i2c = busio.I2C(board.SCL, board.SDA)
-        light_sensor = adafruit_tsl2561.TSL2561(i2c)
+        light_sensor = adafruit_tsl2561.TSL2561(i2c, address=43)
         print(f'Luminousity: {light_sensor.lux}')
         # send to server
         sensor_data = {
@@ -33,4 +33,10 @@ while True:
         }
         log_arduino_data_to_server(sensor_data)
     except Exception as e:
-        print(f'[ERROR] : Arduino Logger : {e}')
+        print(f'[ERROR] : Arduino Logger 2 : {e}')
+        try:
+            light_sensor = adafruit_tsl2561.TSL2561(i2c, address=20)
+            print(f'Luminousity: {light_sensor.lux}')
+        except expression as f:
+            print(f'[ERROR] : Arduino Logger 2 : {f}')
+        
