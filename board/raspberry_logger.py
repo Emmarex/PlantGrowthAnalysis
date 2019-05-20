@@ -1,4 +1,5 @@
 #
+import csv
 from datetime import datetime
 import requests
 # Temperature sensor
@@ -15,6 +16,11 @@ def log_raspberry_data_to_server(sensor_data):
     else:
         log_data_to_server(sensor_data)
 
+def save_to_csv(data):
+    with open('../csv_data/raspberry_logger.csv', 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow(data)
+    csvFile.close()
 
 air_temp_sensor = W1ThermSensor()
 soil_temp_sensor = W1ThermSensor()
@@ -34,6 +40,9 @@ while True:
             "soil_temp":soil_temperature,
             "air_temp":air_temperature,
         }
+        # save to csv
+        save_to_csv([datetime.now(), soil_temperature, air_temperature])
+        # 
         log_raspberry_data_to_server(sensor_data)
     except Exception as e:
         print(f'[ERROR] : Raspberry Logger : {e}')

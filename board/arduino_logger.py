@@ -16,6 +16,12 @@ def log_arduino_data_to_server(sensor_data):
             print(f'ERROR: {res["message"]}')
     else:
         log_data_to_server(sensor_data)
+
+def save_to_csv(data):
+    with open('../csv_data/arduino_logger.csv', 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow(data)
+    csvFile.close()
     
 while True:
     try:
@@ -31,6 +37,9 @@ while True:
             "soil_mois_2" : "",
             "soil_mois_3" : ""
         }
+        # save to csv
+        save_to_csv([datetime.now(),light_sensor.lux])
+        # 
         log_arduino_data_to_server(sensor_data)
     except Exception as e:
         print(f'[ERROR] : Arduino Logger 2 : {e}')
